@@ -1,24 +1,92 @@
-linreg<-function(formula,data){
-  X<-model.matrix(formula,data)
-  y<-data[,all.vars(formula)[1]]
-  B_h<-solve(t(X)%*%X)%*%t(X)%*%y
-  # B_h<-as.vector(B_h)
-  y_h<-X%*%B_h
-  e<-y-y_h
-  df<-nrow(X)-nrow(B_h)
-  e_var<-(t(e)%*%e)/df
-  B_h_var<-c(e_var)*diag(solve(t(X)%*%X))
-  t_value<-B_h/sqrt(B_h_var)
+linreg<-setRefClass('linreg',fields=list(formula='formula',
+                                         data ='data.frame',
+                                         B_h='vector',
+                                         y_h='matrix',
+                                         e='matrix',
+                                         df='numeric',
+                                         e_var='matrix',
+                                         B_h_var='vector',
+                                         t_value='matrix',
+                                         data_name='character'
+),
+methods=list(
+  initialize=function(formula=formula(),data=data.frame()){
+    .self$formula<<-formula
+    .self$data<<-data
+    
+    data_name_a<-deparse(substitute(data))
+    
+    X<-model.matrix(formula,data)
+    y<-as.matrix(data[,all.vars(formula)[1]])
+    B_h_a<-round(solve(t(X)%*%X)%*%(t(X)%*% y),2)
+    
+    y_h_a<-X%*%B_h_a
+    e_a<-y-y_h_a
+    df_a<-nrow(X)-nrow(B_h_a)
+    e_var_a<-(t(e_a)%*%e_a)/df_a
+    B_h_var_a<-c(e_var_a)*diag(solve(t(X)%*%X))
+    t_value_a<-B_h_a/sqrt(B_h_var_a)
+    
+    B_h_a<-as.vector(B_h_a)
+    names(B_h_a)<-colnames(X)
+    
+    .self$B_h<<-B_h_a
+    .self$y_h<<-y_h_a
+    .self$e<<-e_a
+    .self$df<<-df_a
+    .self$e_var<<-e_var_a
+    .self$B_h_var<<-B_h_var_a
+    .self$t_value<<-t_value_a
+    .self$data_name<-data_name_a
+  },
   
-  B_h<-as.vector(B_h)
-  names(B_h)<-colnames(X)
-  linreg_class<-setRefClass('linreg_class',fields=list(B_h='vector',e='matrix',
-                                           e_var='matrix',
-                                           B_h_var='vector',
-                                           t_value='matrix'
-                                           ))
-  linreg_obj<-linreg_class$new(B_h=B_h,e=e,e_var=e_var,B_h_var=B_h_var,t_value=t_value)
-  return(linreg_obj)
-}
-linreg_call_func<-linreg(formula = Petal.Length ~ Species, data = iris)
+  resid=function(){return(c(e))},
+  
+  pred=function(){return(y_h)},
+  
+  coef=function(){return(B_h)},
+  
+  print=function(){
+    cat('call:')
+    cat(sep='\n')
+    cat(paste('linreg(formula=',format(formula),',' ,'data=',data_name ,')\n\n',sep=''))
+    cat('Coffiecients:\n')
+    print.default(format(B_h),
+                  print.gap = 2L,quote=FALSE)},
+  
+  plot=function(){
+    library(ggplot2)
+    library(gridExtra)
+    plot1=ggplot(data.frame(e,y_h),aes(y=e,x=y_h))+
+      geom_point(size=2.5,shape=1)+
+      geom_smooth(method = 'lm',linetype='dotted',se=FALSE)+
+      ggtitle('Residuals vs Fitted')+
+      xlab(paste('Fitted values\n','linreg(',format(formula),')',''))+
+      ylab('Residuals')+
+      stat_summary(aes(y=e,x=y_h,group=1),
+                   fun=median,colour='red',geom='line',group=1)+
+      theme(plot.title=element_text(hjust=0.5),panel.background = element_rect(fill='white',color = 'black'))
+    
+    stand_e<-sqrt(abs((e-mean(e))/sd(e)))
+    plot2=ggplot(data.frame(stand_e,y_h),aes(y=stand_e,x=y_h,group=1))+
+      geom_point(size=3,shape=1)+
+      ggtitle('Scale−Location')+
+      xlab(paste('Fitted values\n','linreg(',format(formula),')',''))+
+      ylab(expression(sqrt('|Standardized Residual|')))+
+      theme(plot.title=element_text(hjust=0.5),panel.background = element_rect(fill='white',color = 'black'))+
+      stat_summary(aes(y=stand_e,x=y_h,group=1),
+                   fun=mean,colour='red',geom='line',group=1)
+    
+    grid.arrange(plot1,plot2,ncol=2)
+    
+  }
+))
+
+linreg_obj<-linreg$new(formula=Petal.Length ~ Species,data=iris)
+linreg_obj$formula
 linreg_obj$B_h
+linreg_obj$resid()
+linreg_obj$pred()
+linreg_obj$coef()
+linreg_obj$print()
+linreg_obj$plot()
