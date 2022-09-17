@@ -1,3 +1,24 @@
+library(ggplot2)
+library(gridExtra)
+#' Title
+#'
+#' @field formula formula. 
+#' @field data data.frame. 
+#' @field B_h vector. 
+#' @field y_h matrix. 
+#' @field e matrix. 
+#' @field df numeric. 
+#' @field e_var matrix. 
+#' @field B_h_var vector. 
+#' @field t_value matrix. 
+#' @field data_name character. 
+#'
+#' @return
+#' @export
+#' @import ggplot2
+#' @import gridExtra
+#' 
+#' @examples
 linreg<-setRefClass('linreg',fields=list(formula='formula',
                                          data ='data.frame',
                                          B_h='vector',
@@ -7,8 +28,7 @@ linreg<-setRefClass('linreg',fields=list(formula='formula',
                                          e_var='matrix',
                                          B_h_var='vector',
                                          t_value='matrix',
-                                         data_name='character'
-),
+                                         data_name='character'),
 methods=list(
   initialize=function(formula=formula(),data=data.frame()){
     .self$formula<<-formula
@@ -55,8 +75,6 @@ methods=list(
                   print.gap = 2L,quote=FALSE)},
   
   plot=function(){
-    library(ggplot2)
-    library(gridExtra)
     plot1=ggplot(data.frame(e,y_h),aes(y=e,x=y_h))+
       geom_point(size=2.5,shape=1)+
       geom_smooth(method = 'lm',linetype='dotted',se=FALSE)+
