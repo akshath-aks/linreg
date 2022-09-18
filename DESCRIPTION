@@ -5,9 +5,9 @@ Version: 1.0
 Date: 2022-09-16
 Author: Akshath, Yaning
 Maintainer: Akshath <akshath.srin@gmail.com>
-Description: It is a RC class linreg regression model. The package uses ordinary linear algebra. Regressions coefficients, the fitted 
-    values, the residuals, the degrees of freedom, the residual variance, the variance of the regression coefficients, the 
-    t-values for each coefficient.
+Description: It is a RC class linear regression model. The package uses ordinary least squares method
+     to calculate best fitted values, estimators(coefficients), residuals,variance of the regression coefficients
+     residual variance, t values and P values.
 License: GPL-3 + file LICENSE
 RoxygenNote: 7.2.1
 Suggests: 

@@ -4,32 +4,32 @@
 \name{linreg-class}
 \alias{linreg-class}
 \alias{linreg}
-\title{Title}
+\title{Linreg Class calculates Multiple Linear Regression Model For Data frame.}
 \description{
-Title
+Linreg Class calculates Multiple Linear Regression Model For Data frame.
 }
 \section{Fields}{
 
 \describe{
-\item{\code{formula}}{formula.}
+\item{\code{formula}}{Dependent and independent columns in data frame}
 
-\item{\code{data}}{data.frame.}
+\item{\code{data}}{Data frame for linear models}
 
-\item{\code{B_h}}{vector.}
+\item{\code{B_h}}{Estimators matrix converted to vector}
 
-\item{\code{y_h}}{matrix.}
+\item{\code{y_h}}{(matrix). Estimated dependent values}
 
-\item{\code{e}}{matrix.}
+\item{\code{e}}{(matrix) Error calculated from actual minus calculated dependent varaiable}
 
-\item{\code{df}}{numeric.}
+\item{\code{df}}{degrees of freedom}
 
-\item{\code{e_var}}{matrix.}
+\item{\code{e_var}}{(matrix) Residual variance}
 
-\item{\code{B_h_var}}{vector.}
+\item{\code{B_h_var}}{variance of the regression coefficients}
 
-\item{\code{t_value}}{matrix.}
+\item{\code{t_value}}{(matrix) T value}
 
-\item{\code{data_name}}{character.}
+\item{\code{data_name}}{(character) Data Frame name}
 }}
 
 

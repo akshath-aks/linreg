@@ -1,22 +1,22 @@
-#' Title
+#' Linreg Class calculates Multiple Linear Regression Model For Data frame.
 #'
-#' @field formula formula. 
-#' @field data data.frame. 
-#' @field B_h vector. 
-#' @field y_h matrix. 
-#' @field e matrix. 
-#' @field df numeric. 
-#' @field e_var matrix. 
-#' @field B_h_var vector. 
-#' @field t_value matrix. 
-#' @field data_name character. 
+#' @field formula Dependent and independent columns in data frame
+#' @field data Data frame for linear models
+#' @field B_h Estimators matrix converted to vector
+#' @field y_h (matrix). Estimated dependent values
+#' @field e (matrix) Error calculated from actual minus calculated dependent varaiable
+#' @field df degrees of freedom
+#' @field e_var (matrix) Residual variance
+#' @field B_h_var variance of the regression coefficients
+#' @field t_value (matrix) T value
+#' @field data_name (character) Data Frame name
 #'
-#' @return
+#' @return 
 #' @export
 #' @import ggplot2
 #' @import gridExtra
-#' 
-#' @examples
+ 
+
 linreg<-setRefClass('linreg',fields=list(formula='formula',
                                          data ='data.frame',
                                          B_h='vector',
