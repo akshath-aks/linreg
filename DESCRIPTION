@@ -1,12 +1,15 @@
 Package: linregpackage
 Type: Package
-Title: What the package does (short line)
+Title: linear regression model
 Version: 1.0
 Date: 2022-09-16
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Akshath, Yaning
+Maintainer: Akshath <akshath.srin@gmail.com>
+Description: It is a RC class linreg regression model.The package use ordinary 
+linear algebra and calculate:Regressionscoeffcients,The fitted values,The residuals,The
+degrees of freedom,The residual variance,The variance of the regression
+coeffcients,The t-values for each coeffcient.
+License: GPL-3
 RoxygenNote: 7.2.1
 Suggests: 
     testthat (>= 3.0.0)
