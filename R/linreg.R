@@ -27,16 +27,19 @@ linreg<-setRefClass('linreg',fields=list(formula='formula',
                                          B_h_var='vector',
                                          t_value='matrix',
                                          data_name='character'),
+                    
+#creating class and adding all the attributes used inside field list.
+
 methods=list(
   initialize=function(formula=formula(),data=data.frame()){
-    .self$formula<<-formula
+    .self$formula<<-formula # assigning 
     .self$data<<-data
     
     data_name_a<-deparse(substitute(data))
     
     X<-model.matrix(formula,data)
     y<-as.matrix(data[,all.vars(formula)[1]])
-    B_h_a<-round(solve(t(X)%*%X)%*%(t(X)%*% y),2)
+    B_h_a<-round(solve(t(X)%*%X)%*%(t(X)%*% y),3)
     
     y_h_a<-X%*%B_h_a
     e_a<-y-y_h_a
@@ -74,10 +77,10 @@ methods=list(
   
   plot=function(){
     library(ggplot2)
-    library(gridExtra)
+    library(ggplot2)
     plot1=ggplot(data.frame(e,y_h),aes(y=e,x=y_h))+
       geom_point(size=2.5,shape=1)+
-      geom_smooth(formula = y ~ x, method = 'lm',linetype='dotted',se=FALSE)+
+      geom_smooth( method = 'lm',linetype='dotted',se=FALSE)+
       ggtitle('Residuals vs Fitted')+
       xlab(paste('Fitted values\n','linreg(',format(formula),')',''))+
       ylab('Residuals')+
@@ -88,7 +91,7 @@ methods=list(
     stand_e<-sqrt(abs((e-mean(e))/sd(e)))
     plot2=ggplot(data.frame(stand_e,y_h),aes(y=stand_e,x=y_h,group=1))+
       geom_point(size=3,shape=1)+
-      ggtitle('Scale−Location')+
+      ggtitle('Scale Location')+
       xlab(paste('Fitted values\n','linreg(',format(formula),')',''))+
       ylab(expression(sqrt('|Standardized Residual|')))+
       theme(plot.title=element_text(hjust=0.5),panel.background = element_rect(fill='white',color = 'black'))+
@@ -100,25 +103,28 @@ methods=list(
   },
   
   summary=function(){
-    p_value <- numeric(length(t_value))
-    for (i in 1:length(t_value)) {
-      if (t_value[i]<0) p_value[i] <- 2 * pt(t_value[i], df)
-      else p_value[i] <- 2 * pt(-t_value[i], df)
-    ('\n')}
+    n<-length(e)
+    k<-length(B_h)
+    resid_stand_error<-round(sqrt(sum(e**2)/(n-(k+1))),4)
     cat('call:')
     cat(sep='\n')
-    cat(paste('linreg(formula=',format(formula),',' ,'data=',data_name ,')\n\n',sep=''))
+    cat(paste('linreg(formula = ',format(formula),', ' ,'data = ',data_name ,')\n\n',sep=''))
     cat('Coffiecients:\n')
-    col_name<-c('Std. Error', 't value', 'Pr(>|t|)')
-    for(i in 1:length(col_name)) cat(sprintf('%*s', 20, col_name[i]))
-    cat
-    for(i in 1:length(B_h)) {
-      cat(sprintf('%-*s', 20, names(B_h)[i]))
-      cat(sprintf('%6.6f\t%6.6f\t%e\n',
-                  sqrt(B_h_var)[i], t_value[i], p_value[i]  ))
-    }
-    cat(paste('\nResidual standard error: ', sprintf('%.4f', sqrt(e_var)),
-              ' on ', df, ' degrees of freedom', sep='', '\n'))
+    coefmatrix<-matrix(B_h)
+    
+    standard_error<-round(sqrt(B_h_var),5)
+    p_value<-2*pt(abs(t_value),df=as.numeric(df),lower.tail = FALSE)
+    stars_dashes<-p_value
+    stars_dashes[stars_dashes>0 & stars_dashes<0.001]<- '***'
+    stars_dashes[stars_dashes>0.001 & stars_dashes<0.01]<- '**'
+    stars_dashes[stars_dashes>0.01 & stars_dashes<0.05]<- '*'
+    stars_dashes[stars_dashes>0.05 & stars_dashes<0.1]<- '.'
+    stars_dashes[stars_dashes>0.1 & stars_dashes<1]<- ''
+    coefmatrix<-cbind(coefmatrix,standard_error,round(t_value,2),p_value,stars_dashes)
+    colnames(coefmatrix)<-c('Estimate','Std.Error','t value','Pr(>|t|)','')
+    print.default(coefmatrix,quote=FALSE)
+    cat('\nResidual standard error:',format(resid_stand_error),'on',
+        df,'degrees of freedom')
   }
 ))
 
@@ -131,6 +137,7 @@ linreg_obj$coef()
 linreg_obj$print()
 linreg_obj$plot()
 linreg_obj$summary()
+linreg_obj$B_h_var
 
 #data(iris)
 #summary(lm(Petal.Length~Species, data = iris))

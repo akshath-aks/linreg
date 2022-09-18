@@ -1,13 +1,16 @@
 Package: linregpackage
 Type: Package
-Title: linear regression model
+Title: Multiple Linear Regression Model
 Version: 1.0
 Date: 2022-09-16
 Author: Akshath, Yaning
 Maintainer: Akshath <akshath.srin@gmail.com>
-Description: It is a RC class linreg regression model. The package uses ordinary linear algebra. Regressions coeffcients, the fitted values, the residuals, the degrees of freedom, the residual variance, the variance of the regression coeffcients, the t-values for each coeffcient.
-License: GPL-3
+Description: It is a RC class linreg regression model. The package uses ordinary linear algebra. Regressions coeffcients, the fitted 
+    values, the residuals, the degrees of freedom, the residual variance, the variance of the regression coeffcients, the 
+    t-values for each coeffcient.
+License: GPL-3 + file LICENSE
 RoxygenNote: 7.2.1
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Imports: ggplot2, gridExtra
