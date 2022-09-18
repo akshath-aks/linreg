@@ -26,21 +26,29 @@ linreg<-setRefClass('linreg',fields=list(formula='formula',
                                          e_var='matrix',
                                          B_h_var='vector',
                                          t_value='matrix',
-                                         data_name='character'),
+                                         data_name='character'),#creating class and adding all the attributes used inside field list.
                     
-#creating class and adding all the attributes used inside field list.
+#adding the methods list, first initiliaze function with formula,data.
 
 methods=list(
   initialize=function(formula=formula(),data=data.frame()){
-    .self$formula<<-formula # assigning 
+    
+    .self$formula<<-formula # assigning the formula and data to attributes
     .self$data<<-data
     
-    data_name_a<-deparse(substitute(data))
+    data_name_a<-deparse(substitute(data)) # getting data.frame name
     
-    X<-model.matrix(formula,data)
-    y<-as.matrix(data[,all.vars(formula)[1]])
+    #creating independent variable matrix
+    X<-model.matrix(formula,data) 
+    
+    #getting dependent variable matrix
+    y<-as.matrix(data[,all.vars(formula)[1]]) 
+    
+    #calculating estimator coefficients.
     B_h_a<-round(solve(t(X)%*%X)%*%(t(X)%*% y),3)
     
+    #calculating predicted y values, residuals(error),degree of freedom,
+    #residual variance, variance of the regression coefficients and t value
     y_h_a<-X%*%B_h_a
     e_a<-y-y_h_a
     df_a<-nrow(X)-nrow(B_h_a)
@@ -48,9 +56,11 @@ methods=list(
     B_h_var_a<-c(e_var_a)*diag(solve(t(X)%*%X))
     t_value_a<-B_h_a/sqrt(B_h_var_a)
     
+    #converting estimators(B_h) from matrix to vector
     B_h_a<-as.vector(B_h_a)
-    names(B_h_a)<-colnames(X)
+    names(B_h_a)<-colnames(X)# adding names to estimators(B_h) vector
     
+    #assignment to attributes
     .self$B_h<<-B_h_a
     .self$y_h<<-y_h_a
     .self$e<<-e_a
@@ -61,12 +71,16 @@ methods=list(
     .self$data_name<-data_name_a
   },
   
+  #creating a function to return residuals
   resid=function(){return(c(e))},
   
+  #getting predicted values
   pred=function(){return(y_h)},
   
+  #returns coefficients(estimators)
   coef=function(){return(B_h)},
   
+  #overwriting print function to get the output same as lm output.
   print=function(){
     cat('call:')
     cat(sep='\n')
@@ -75,9 +89,14 @@ methods=list(
     print.default(format(B_h),
                   print.gap = 2L,quote=FALSE)},
   
+   
   plot=function(){
+    #install and load ggplot2.gridExtra
     library(ggplot2)
-    library(ggplot2)
+    library(gridExtra)
+    
+    #creating plots for residual Vs fitted value
+    
     plot1=ggplot(data.frame(e,y_h),aes(y=e,x=y_h))+
       geom_point(size=2.5,shape=1)+
       geom_smooth( method = 'lm',linetype='dotted',se=FALSE)+
@@ -87,6 +106,8 @@ methods=list(
       stat_summary(aes(y=e,x=y_h,group=1),
                    fun=median,colour='red',geom='line',group=1)+
       theme(plot.title=element_text(hjust=0.5),panel.background = element_rect(fill='white',color = 'black'))
+    
+    #creating plot for fitted value vs sqrt of standardized residuals
     
     stand_e<-sqrt(abs((e-mean(e))/sd(e)))
     plot2=ggplot(data.frame(stand_e,y_h),aes(y=stand_e,x=y_h,group=1))+
@@ -101,6 +122,9 @@ methods=list(
     grid.arrange(plot1,plot2,ncol=2)
     
   },
+  
+  #summary returns matrix having estimate, standard error, t value, p value
+  # and also returns residual standard error and degree of freedom
   
   summary=function(){
     n<-length(e)
@@ -128,6 +152,7 @@ methods=list(
   }
 ))
 
+# creating and initializing the object
 linreg_obj<-linreg$new(formula=Petal.Length ~ Species,data=iris)
 linreg_obj$formula
 linreg_obj$t_value
@@ -139,5 +164,3 @@ linreg_obj$plot()
 linreg_obj$summary()
 linreg_obj$B_h_var
 
-#data(iris)
-#summary(lm(Petal.Length~Species, data = iris))
