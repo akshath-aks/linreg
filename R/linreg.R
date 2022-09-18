@@ -1,5 +1,3 @@
-library(ggplot2)
-library(gridExtra)
 #' Title
 #'
 #' @field formula formula. 
@@ -69,12 +67,14 @@ methods=list(
   print=function(){
     cat('call:')
     cat(sep='\n')
-    cat(paste('linreg(formula=',format(formula),',' ,'data=',data_name ,')\n\n',sep=''))
+    cat(paste('linreg(formula = ',format(formula),', ' ,'data = ',data_name ,')\n\n',sep=''))
     cat('Coffiecients:\n')
     print.default(format(B_h),
                   print.gap = 2L,quote=FALSE)},
   
   plot=function(){
+    library(ggplot2)
+    library(gridExtra)
     plot1=ggplot(data.frame(e,y_h),aes(y=e,x=y_h))+
       geom_point(size=2.5,shape=1)+
       geom_smooth(method = 'lm',linetype='dotted',se=FALSE)+
@@ -102,7 +102,7 @@ methods=list(
 
 linreg_obj<-linreg$new(formula=Petal.Length ~ Species,data=iris)
 linreg_obj$formula
-linreg_obj$B_h
+linreg_obj$t_value
 linreg_obj$resid()
 linreg_obj$pred()
 linreg_obj$coef()
