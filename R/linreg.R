@@ -77,7 +77,7 @@ methods=list(
   plot=function(){
     plot1=ggplot(data.frame(e,y_h),aes(y=e,x=y_h))+
       geom_point(size=2.5,shape=1)+
-      geom_smooth(method = 'lm',linetype='dotted',se=FALSE)+
+      geom_smooth(formula = y ~ x, method = 'lm',linetype='dotted',se=FALSE)+
       ggtitle('Residuals vs Fitted')+
       xlab(paste('Fitted values\n','linreg(',format(formula),')',''))+
       ylab('Residuals')+
@@ -97,6 +97,28 @@ methods=list(
     
     grid.arrange(plot1,plot2,ncol=2)
     
+  },
+  
+  summary=function(){
+    p_value <- numeric(length(t_value))
+    for (i in 1:length(t_value)) {
+      if (t_value[i]<0) p_value[i] <- 2 * pt(t_value[i], df)
+      else p_value[i] <- 2 * pt(-t_value[i], df)
+    ('\n')}
+    cat('call:')
+    cat(sep='\n')
+    cat(paste('linreg(formula=',format(formula),',' ,'data=',data_name ,')\n\n',sep=''))
+    cat('Coffiecients:\n')
+    col_name<-c('Std. Error', 't value', 'Pr(>|t|)')
+    for(i in 1:length(col_name)) cat(sprintf('%*s', 20, col_name[i]))
+    cat
+    for(i in 1:length(B_h)) {
+      cat(sprintf('%-*s', 20, names(B_h)[i]))
+      cat(sprintf('%6.6f\t%6.6f\t%e\n',
+                  sqrt(B_h_var)[i], t_value[i], p_value[i]  ))
+    }
+    cat(paste('\nResidual standard error: ', sprintf('%.4f', sqrt(e_var)),
+              ' on ', df, ' degrees of freedom', sep='', '\n'))
   }
 ))
 
@@ -108,3 +130,7 @@ linreg_obj$pred()
 linreg_obj$coef()
 linreg_obj$print()
 linreg_obj$plot()
+linreg_obj$summary()
+
+#data(iris)
+#summary(lm(Petal.Length~Species, data = iris))
