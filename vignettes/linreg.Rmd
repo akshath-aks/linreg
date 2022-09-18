@@ -1,0 +1,63 @@
+---
+title: "linreg"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{linreg}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(linregpackage)
+```
+##description
+
+The linreg package have the two arguments formula and data. The package calculates: regressions coefficients, the fitted values, the residuals, the degrees of freedom, the residual variance, the variance of the regression coefficients, the t-values for each coefficient.
+
+
+##methods
+
+print()
+The function print() print out the coefficients and coefficient names
+
+plot() 
+The function plot() the following two plots using ggplot2
+
+resid() 
+The function resid() plot return the vector of residuals
+
+coef() 
+The function coef() return the coefficients as a named vector
+
+summary() 
+The function return a similar printout as printed for lm objects
+
+
+##Examples
+
+linreg_obj<-linreg$ new(formula=Petal.Length ~ Species,data=iris)
+
+linreg_obj$ formula
+
+linreg_obj$ t_value
+
+linreg_obj$ resid()
+
+linreg_obj$ pred()
+
+linreg_obj$ coef()
+
+linreg_obj$ print()
+
+linreg_obj$ plot()
+
+linreg_obj$ summary()
+
+linreg_obj$ B_h_var

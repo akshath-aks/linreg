@@ -5,12 +5,15 @@ Version: 1.0
 Date: 2022-09-16
 Author: Akshath, Yaning
 Maintainer: Akshath <akshath.srin@gmail.com>
-Description: It is a RC class linreg regression model. The package uses ordinary linear algebra. Regressions coeffcients, the fitted 
-    values, the residuals, the degrees of freedom, the residual variance, the variance of the regression coeffcients, the 
-    t-values for each coeffcient.
+Description: It is a RC class linreg regression model. The package uses ordinary linear algebra. Regressions coefficients, the fitted 
+    values, the residuals, the degrees of freedom, the residual variance, the variance of the regression coefficients, the 
+    t-values for each coefficient.
 License: GPL-3 + file LICENSE
 RoxygenNote: 7.2.1
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: ggplot2, gridExtra
+VignetteBuilder: knitr
