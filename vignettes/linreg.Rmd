@@ -17,47 +17,99 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(linregpackage)
 ```
-##description
 
-The linreg package have the two arguments formula and data. The package calculates: regressions coefficients, the fitted values, the residuals, the degrees of freedom, the residual variance, the variance of the regression coefficients, the t-values for each coefficient.
+**Description**  
+
+    The linreg package uses ordinary least squares methodto calculate best fitted values, estimators(coefficients), residuals,variance of the regression coefficients residual variance, t values and P values.
+  
+  
+**Installation** 
+
+    The Package can be downloaded from.
+    
+    devtools::install_github("akshath-aks/linreg")
+    
+    
+**Vignette**  
+
+    After installation run the code below to find vignettes
+   
+    browseVignettes('linregpackage)
+    
+    
+**Attributes defined in the Class **
+
+    Linreg Class contains following attributes:
+        *formula (formula). Dependent and independent columns in data frame
+        *data (data.frame). Data frame for linear models
+        *B_h (Vector). Estimators matrix converted to vector
+        *y_h (matrix). Estimated dependent values
+        *e (matrix). Error calculated from actual minus calculated dependent varaiable
+        *df (numeric). degrees of freedom
+        *e_var (matrix). Residual variance
+        *B_h_var (vector). variance of the regression coefficients
+        *t_value (matrix). T value
+        *data_name (character). Data Frame name
 
 
-##methods
-
-print()
-The function print() print out the coefficients and coefficient names
-
-plot() 
-The function plot() the following two plots using ggplot2
-
-resid() 
-The function resid() plot return the vector of residuals
-
-coef() 
-The function coef() return the coefficients as a named vector
-
-summary() 
-The function return a similar printout as printed for lm objects
+**Methods**
 
 
-##Examples
+1.print()  
 
-linreg_obj<-linreg$ new(formula=Petal.Length ~ Species,data=iris)
+     Prints out the coefficients and coefficient names
 
-linreg_obj$ formula
+2.plot()  
 
-linreg_obj$ t_value
+    Plots the following **Residuals vs Fitted values** and **Standardized error vs Fitted values** plots using ggplot2
 
-linreg_obj$ resid()
+3.resid()  
 
-linreg_obj$ pred()
+    This method returns the vector of residuals(errors)
 
-linreg_obj$ coef()
+coef()  
 
-linreg_obj$ print()
+     Returns the coefficients as a named vector
 
-linreg_obj$ plot()
+summary()  
 
-linreg_obj$ summary()
+    Summary returns a matrix of Estimate, Standard Error, t value, P value, Residual standard error and degrees of freedom.
 
-linreg_obj$ B_h_var
+
+**Examples**   
+
+    
+    1) linreg_obj<-linreg$new(formula=Petal.Length ~ Species,data=iris)
+    linreg_obj$print()
+  
+    call:
+    linreg(formula = Petal.Length ~ Species, data = iris)
+
+    Coffiecients:
+      (Intercept)  Speciesversicolor   Speciesvirginica  
+            1.462              2.798              4.090 
+            
+    
+    
+    2) linreg_obj<-linreg$new(formula=Petal.Length ~ Species,data=iris)
+    linreg_obj$summary()
+    
+    call:
+    linreg(formula = Petal.Length ~ Species, data = iris)
+
+    Coffiecients:
+                  Estimate Std.Error t value Pr(>|t|)                
+    (Intercept)       1.462    0.06086   24.02   9.3030515228435e-53  ***
+    Speciesversicolor 2.798    0.08607   32.51   5.25458742021361e-69 ***
+    Speciesvirginica  4.09     0.08607   47.52   4.106138619051e-91   ***
+
+    Residual standard error: 0.4318 on 147 degrees of freedom
+    
+    
+    
+    3) linreg_obj<-linreg$new(formula=Petal.Length ~ Species,data=iris)
+    linreg_obj$plot()
+    
+![Reiduals Vs Fitted and Scale location](C:\Users\aksha\Downloads\plots.png)
+
+
