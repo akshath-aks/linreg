@@ -342,32 +342,77 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(linregpackage)</span></code></pre></div>
-<p>##description</p>
-<p>The linreg package have the two arguments formula and data. The
-package calculates: regressions coefficients, the fitted values, the
-residuals, the degrees of freedom, the residual variance, the variance
-of the regression coefficients, the t-values for each coefficient.</p>
-<p>##methods</p>
-<p>print() The function print() print out the coefficients and
-coefficient names</p>
-<p>plot() The function plot() the following two plots using ggplot2</p>
-<p>resid() The function resid() plot return the vector of residuals</p>
-<p>coef() The function coef() return the coefficients as a named
-vector</p>
-<p>summary() The function return a similar printout as printed for lm
-objects</p>
-<p>##Examples</p>
-<p>linreg_obj&lt;-linreg$ new(formula=Petal.Length ~
-Species,data=iris)</p>
-<p>linreg_obj$ formula</p>
-<p>linreg_obj$ t_value</p>
-<p>linreg_obj$ resid()</p>
-<p>linreg_obj$ pred()</p>
-<p>linreg_obj$ coef()</p>
-<p>linreg_obj$ print()</p>
-<p>linreg_obj$ plot()</p>
-<p>linreg_obj$ summary()</p>
-<p>linreg_obj$ B_h_var</p>
+<p><strong>Description</strong></p>
+<p>The linreg package uses ordinary least squares methodto calculate
+best fitted values, estimators(coefficients), residuals,variance of the
+regression coefficients residual variance, t values and P values.</p>
+<p><strong>Installation</strong></p>
+<p>The Package can be downloaded from.</p>
+<pre><code>devtools::install_github(&quot;akshath-aks/linreg&quot;)</code></pre>
+<p><strong>Vignette</strong></p>
+<p>After installation run the code below to find vignettes.</p>
+<pre><code>browseVignettes(&#39;linregpackage)</code></pre>
+<p><strong>Attributes defined in the Class </strong></p>
+<pre><code>Linreg Class contains following attributes:
+    *formula (formula). Dependent and independent columns in data frame
+    *data (data.frame). Data frame for linear models
+    *B_h (Vector). Estimators matrix converted to vector
+    *y_h (matrix). Estimated dependent values
+    *e (matrix). Error calculated from actual minus calculated dependent varaiable
+    *df (numeric). degrees of freedom
+    *e_var (matrix). Residual variance
+    *B_h_var (vector). variance of the regression coefficients
+    *t_value (matrix). T value
+    *data_name (character). Data Frame name</code></pre>
+<p><strong>Methods</strong></p>
+<p>1.print()</p>
+<p>Prints out the coefficients.</p>
+<p>2.plot()</p>
+<p>Plots the following <strong>Residuals vs Fitted values</strong> and
+<strong>Standardized error vs Fitted values</strong> plots using
+ggplot2</p>
+<p>3.resid()</p>
+<p>This method returns the vector of residuals(errors).</p>
+<p>4.coef()</p>
+<p>Returns the coefficients as a named vector.</p>
+<p>5.summary()</p>
+<p>Summary returns a matrix of Estimate, Standard Error, t value, P
+value, Residual standard error and degrees of freedom.</p>
+<p><strong>Examples</strong></p>
+<pre><code>1) linreg_obj&lt;-linreg$new(formula=Petal.Length ~ Species,data=iris)
+linreg_obj$print()
+
+call:
+linreg(formula = Petal.Length ~ Species, data = iris)
+
+Coffiecients:
+  (Intercept)  Speciesversicolor   Speciesvirginica  
+        1.462              2.798              4.090 
+        
+
+
+2) linreg_obj&lt;-linreg$new(formula=Petal.Length ~ Species,data=iris)
+linreg_obj$summary()
+
+call:
+linreg(formula = Petal.Length ~ Species, data = iris)
+
+Coffiecients:
+              Estimate Std.Error t value Pr(&gt;|t|)                
+(Intercept)       1.462    0.06086   24.02   9.3030515228435e-53  ***
+Speciesversicolor 2.798    0.08607   32.51   5.25458742021361e-69 ***
+Speciesvirginica  4.09     0.08607   47.52   4.106138619051e-91   ***
+
+Residual standard error: 0.4318 on 147 degrees of freedom
+
+
+
+3) linreg_obj&lt;-linreg$new(formula=Petal.Length ~ Species,data=iris)
+linreg_obj$plot()</code></pre>
+<div class="figure">
+<img src="data:image/png;base64,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" alt />
+<p class="caption">Reiduals Vs Fitted and Scale location</p>
+</div>
 
 
 

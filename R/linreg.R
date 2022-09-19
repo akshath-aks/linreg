@@ -15,6 +15,7 @@
 #' @export
 #' @import ggplot2
 #' @import gridExtra
+#' @import methods
  
 
 linreg<-setRefClass('linreg',fields=list(formula='formula',

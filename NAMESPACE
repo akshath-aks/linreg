@@ -3,3 +3,4 @@
 exportClasses(linreg)
 import(ggplot2)
 import(gridExtra)
+import(methods)
