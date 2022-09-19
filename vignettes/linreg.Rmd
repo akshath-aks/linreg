@@ -20,20 +20,25 @@ library(linregpackage)
 
 **Description**  
 
-    The linreg package uses ordinary least squares methodto calculate best fitted values, estimators(coefficients), residuals,variance of the regression coefficients residual variance, t values and P values.
+
+The linreg package uses ordinary least squares methodto calculate best fitted values, estimators(coefficients), residuals,variance of the regression coefficients residual variance, t values and P values.
   
   
 **Installation** 
 
-    The Package can be downloaded from.
+
+The Package can be downloaded from.
+    
     
     devtools::install_github("akshath-aks/linreg")
     
     
 **Vignette**  
 
-    After installation run the code below to find vignettes
-   
+
+After installation run the code below to find vignettes.
+    
+    
     browseVignettes('linregpackage)
     
     
@@ -57,23 +62,29 @@ library(linregpackage)
 
 1.print()  
 
-     Prints out the coefficients and coefficient names
+  Prints out the coefficients.
+
 
 2.plot()  
 
-    Plots the following **Residuals vs Fitted values** and **Standardized error vs Fitted values** plots using ggplot2
+  Plots the following **Residuals vs Fitted values** and **Standardized error vs Fitted values** plots using ggplot2
+
 
 3.resid()  
 
-    This method returns the vector of residuals(errors)
+  This method returns the vector of residuals(errors).
 
-coef()  
 
-     Returns the coefficients as a named vector
+4.coef()  
 
-summary()  
+  Returns the coefficients as a named vector.
 
-    Summary returns a matrix of Estimate, Standard Error, t value, P value, Residual standard error and degrees of freedom.
+
+5.summary()  
+
+  Summary returns a matrix of Estimate, Standard Error, t value, P value, Residual standard error and degrees of freedom.
+
+
 
 
 **Examples**   
@@ -110,6 +121,8 @@ summary()
     3) linreg_obj<-linreg$new(formula=Petal.Length ~ Species,data=iris)
     linreg_obj$plot()
     
-![Reiduals Vs Fitted and Scale location](C:\Users\aksha\Downloads\plots.png)
+![Reiduals Vs Fitted and Scale location](https://raw.githubusercontent.com/akshath-aks/linreg/main/vignettes/plots.png)
+    
+
 
 
