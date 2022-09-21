@@ -12,7 +12,8 @@
 #' @field data_name (character) Data Frame name
 #'
 #' @return 
-#' @export
+#' @exportClass linreg
+#' @export linreg
 #' @import ggplot2
 #' @import gridExtra
 #' @import methods

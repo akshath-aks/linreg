@@ -21,7 +21,7 @@ library(linregpackage)
 **Description**  
 
 
-The linreg package uses ordinary least squares methodto calculate best fitted values, estimators(coefficients), residuals,variance of the regression coefficients residual variance, t values and P values.
+The linreg package uses ordinary least squares method to calculate best fitted values, estimators(coefficients), residuals,variance of the regression coefficients residual variance, t values and P values.
   
   
 **Installation** 
@@ -39,7 +39,7 @@ The Package can be downloaded from.
 After installation run the code below to find vignettes.
     
     
-    browseVignettes('linregpackage)
+    browseVignettes('linregpackage')
     
     
 **Attributes defined in the Class **
