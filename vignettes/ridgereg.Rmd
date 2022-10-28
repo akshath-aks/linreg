@@ -19,7 +19,7 @@ library(linregpackage)
 ```
 
 **Description** 
-
+Ridgereg Class calculates Ridge Regression Model For Data frame.
 The ridgereg function is used to do a simple prediction problem. The function calculate regressions coefficients and the fitted values.
 
 **Installation**
@@ -37,12 +37,12 @@ After installation run the code below to find vignettes.
     Ridgereg Class contains following attributes:
 
       *formula (formula). Dependent and independent columns in data frame
-      *data (data.frame). Data frame for ridgereg models
-      *lamda (numeric). Numeric frame for ridgereg models
+      *data (data.frame). Data frame for ridge regression models
+      *lamda (numeric). hyper parameter value
       *data_name (character). Data Frame name
-      *B_ridge (vector) .Regressions coefficients
+      *B_ridge (vector) .calculates Beta ridge coefficients
       *y_h (matrix). Estimated dependent values
-      *X (matrix).Independent variable matrix
+      *X (matrix).model matrix which is scaled later
 
 **Methods**
 
