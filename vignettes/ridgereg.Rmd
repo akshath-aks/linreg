@@ -73,27 +73,21 @@ test_set= subset(BostonHousing,split==FALSE)
 2. Use lm function to train dataset to fit a linear regression and also uses forward selection method
 ```{r,include=TRUE,eval=TRUE,echo=TRUE,results='hide'}
 intercept<-lm(medv~1, data=training_set)
-intercept
 all<-lm(medv~.,data=training_set)
 forward<-step(intercept, direction = 'forward', scope = formula(all),trace=0)
-forward
 summary(forward)
 
 y_pred = predict(forward,newdata = test_set)
-y_pred
-View(test_set)
+
 ```
 3. Evaluate the performance of the model by predicting the values on test dataset.
 ```{r,include=TRUE,eval=TRUE,echo=TRUE,results='hide'}
 #Root mean squared error
 rmse<-rminer::mmetric(test_set[,14],y_pred,"RMSE")
-rmse
 #mean absolute percentage error
 mape<-rminer::mmetric(test_set[,14],y_pred,"MAPE")
-mape
 #R squared
 r2<-rminer::mmetric(test_set[,14],y_pred,"R2")
-r2
 ```
 4. Use ridgereg function to train dataset on different lambda values to fit a regression model and evaluating performance by predicting on test set.  
 ```{r,include=TRUE,eval=TRUE,echo=TRUE,results='hide',fig.show='hide'}
@@ -153,13 +147,10 @@ plot(ridgefit)
 #performance of lm 
 #Root mean squared error
 rmse<-rminer::mmetric(test_set[,14],y_pred,"RMSE")
-rmse
 #mean absolute percentage error
 mape<-rminer::mmetric(test_set[,14],y_pred,"MAPE")
-mape
 #R squared
 r2<-rminer::mmetric(test_set[,14],y_pred,"R2")
-r2
 
 
 #performance of the ridgereg function

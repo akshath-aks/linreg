@@ -4,26 +4,26 @@
 \name{ridgereg-class}
 \alias{ridgereg-class}
 \alias{ridgereg}
-\title{Title}
+\title{Ridgereg Class calculates Ridge Regression Model For Data frame.}
 \description{
-Title
+Ridgereg Class calculates Ridge Regression Model For Data frame.
 }
 \section{Fields}{
 
 \describe{
-\item{\code{formula}}{formula.}
+\item{\code{formula}}{(formula) Dependent and independent columns in data frame}
 
-\item{\code{data}}{data.frame.}
+\item{\code{data}}{(data.frame) Data frame for ridge regression models}
 
-\item{\code{B_ridge}}{vector.}
+\item{\code{B_ridge}}{(vector) calculates Beta ridge coefficients}
 
-\item{\code{y_h}}{matrix.}
+\item{\code{y_h}}{(matrix) Estimated dependent values}
 
-\item{\code{X}}{matrix.}
+\item{\code{X}}{(matrix) model matrix which is scaled later}
 
-\item{\code{data_name}}{character.}
+\item{\code{data_name}}{(character) Data Frame name}
 
-\item{\code{lamda}}{numeric.}
+\item{\code{lamda}}{(numeric) hyper parameter value}
 }}
 
 

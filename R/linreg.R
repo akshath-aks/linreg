@@ -15,7 +15,6 @@
 #' @exportClass linreg
 #' @export linreg
 #' @import ggplot2
-#' @import gridExtra
 #' @import methods
  
 
@@ -121,7 +120,7 @@ methods=list(
       stat_summary(aes(y=stand_e,x=y_h,group=1),
                    fun=mean,colour='red',geom='line',group=1)
     
-    grid.arrange(plot1,plot2,ncol=2)
+    # grid.arrange(plot1,plot2,ncol=2)
     
   },
   
@@ -155,14 +154,14 @@ methods=list(
 ))
 
 # creating and initializing the object
-linreg_obj<-linreg$new(formula=Petal.Length ~ Species,data=iris)
-linreg_obj$formula
-linreg_obj$t_value
-linreg_obj$resid()
-linreg_obj$pred()
-linreg_obj$coef()
-linreg_obj$print()
-linreg_obj$plot()
-linreg_obj$summary()
-linreg_obj$B_h_var
+# linreg_obj<-linreg$new(formula=Petal.Length ~ Species,data=iris)
+# linreg_obj$formula
+# linreg_obj$t_value
+# linreg_obj$resid()
+# linreg_obj$pred()
+# linreg_obj$coef()
+# linreg_obj$print()
+# linreg_obj$plot()
+# linreg_obj$summary()
+# linreg_obj$B_h_var
 
