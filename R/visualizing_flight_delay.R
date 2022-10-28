@@ -5,6 +5,7 @@
 #' @import dplyr
 #' @import ggplot2
 #' @import nycflights13
+#' @importFrom  plotly ggplotly
 #'
 #' @examples
 Visualizing_flight_delay<-function(){
@@ -15,7 +16,7 @@ Visualizing_flight_delay<-function(){
   flights<-flights[!is.na(flights$arr_delay),]
   
   #calculating delays of destination airport
-  library(dplyr)
+  requireNamespace('dplyr')
   fl_dest<- flights %>% dplyr::group_by(dest) %>%
     dplyr::summarise(avg_delay_dest=mean(arr_delay+dep_delay))
   colnames(fl_dest)<-c('airports','mean_delay')
@@ -39,8 +40,8 @@ Visualizing_flight_delay<-function(){
   
   
   #hover over the points to see mean delay
-  library(ggplot2)
-  library(plotly)
+  requireNamespace('ggplot2')
+  requireNamespace('plotly')
   p<-ggplot2::ggplot(merging,ggplot2::aes(label1=mean_delay))+
     ggplot2::geom_point(ggplot2::aes(x=lat,y=lon,color=airport))+
     ggplot2::theme(legend.position = 'none')+xlab('latitude')+ylab('longitude')+
