@@ -143,7 +143,7 @@ plot(ridgefit)
 6. Evaluating the performance of all three models on the test dataset and concluding comments
 
 
-    Performance of regression models are evaluated by root mean squared error, R squared, Mean absolute percentage error. below you can find all the performance evaluating criteria for all the three models implemented. Finally using 10 cross fold validation gives the best hyperparmeter value λ.
+  Performance of regression models are evaluated by root mean squared error, R squared, Mean absolute percentage error. below you can find all the performance evaluating criteria for all the three models implemented. Finally using 10 cross fold validation gives the best hyperparmeter value λ.
     
 ```{r,include=TRUE,eval=TRUE,echo=TRUE}
 #performance of lm 

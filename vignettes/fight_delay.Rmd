@@ -146,7 +146,9 @@ for (i in 1:length(lamda)){
 idx<-which(rmse_vec==min(rmse_vec))
 plot(lamda,rmse_vec)
 ```
-5. using λ value to predict the test set and report the RMSE of the predicted model.
+
+
+5. using λ value to predict the test set and reporting the RMSE of the predicted model.
 ```{r,include=TRUE,eval=TRUE,echo=TRUE,results='hide'}
 # we can see that rmse is very minimum that is around 0.0001
 
@@ -156,7 +158,7 @@ model
 pred<-model$predict(test)
 ```
 
-This is our RMSE value, this prediction and values depends on selecting features and amount of data, but we can see the rmse values of test data is slightly higher than training data but lower than validation data this confirms our model is not overfitted
+RMSE value on predicting test data is shown below, prediction and RMSE value depends on selecting features and amount of data, but we can see the rmse values of test data is slightly higher than training data but lower than validation data this confirms our model is not overfitted
 
 ```{r,include=TRUE,eval=TRUE,echo=TRUE}
 rmse<-rminer::mmetric(test$arr_delay,pred,"RMSE")
