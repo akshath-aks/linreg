@@ -5,10 +5,15 @@ Version: 1.0
 Date: 2022-09-16
 Author: c(person('Akshath Srinivas','akssr921@student.liu.se',role=c('aut')),
     person('Yaning Wang','yanwa579@student.liu.se',role=c('aut')))
-Maintainer: Akshath, yaning <akssr921@student.liu.se>
-Description: It is a RC class linear regression model. The package uses ordinary least squares method
-     to calculate best fitted values, estimators(coefficients), residuals,variance of the regression coefficients
-     residual variance, t values and P values.
+Maintainer: Akshath Srinivas, yaning wang <akssr921@student.liu.se>
+Description:RC class for linear regression model and Ridge regression model. The package uses ordinary least
+     squares method to calculate best fitted values, estimators(coefficients), residuals,variance of the regression 
+     coefficients residual variance, t values and P values using linreg class. This package also has ridgereg class
+     which fits the model to find out ridge estimators and also predics the values for new data.
+     Furthermore, package includes a function that visualizes
+     the mean delay of airports by longitude and latitude. Finally, this package
+     includes vignettes for machine learning models implemented on BostonHousing datasets and 
+     predictive modelling of flight delays.
 License: GPL-3 + file LICENSE
 RoxygenNote: 7.2.1
 Suggests: 
