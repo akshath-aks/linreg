@@ -1,6 +1,6 @@
 Package: linregpackage
 Type: Package
-Title: Multiple Linear Regression Model
+Title: Multiple Linear Regression Model and Ridge regression model
 Version: 1.0
 Date: 2022-09-16
 Author: c(person('Akshath Srinivas','akssr921@student.liu.se',role=c('aut')),
@@ -25,6 +25,8 @@ Imports:
     caret,
     rminer,
     caTools,
-    mlbench
-Depends:plotly
+    mlbench,
+    plotly,
+    elasticnet
+Encoding:UTF-8
 VignetteBuilder: knitr

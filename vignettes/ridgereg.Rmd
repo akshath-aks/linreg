@@ -89,7 +89,7 @@ mape<-rminer::mmetric(test_set[,14],y_pred,"MAPE")
 #R squared
 r2<-rminer::mmetric(test_set[,14],y_pred,"R2")
 ```
-4. Using our ridgereg function to train dataset on different lambda values to fit a regression model and evaluating performance by predicting on test set.  
+4. Using our ridgereg function to train dataset on different lambda values to fit a regression model and evaluating performance after predicting on test set.  
 ```{r,include=TRUE,eval=TRUE,echo=TRUE,results='hide',fig.show='hide'}
 
 model<-linregpackage::ridgereg(formula=medv~.,data=training_set,lamda=1)
