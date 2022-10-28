@@ -100,7 +100,7 @@ rmse_vec<-c() # root mean squared errors
 mape_vec<-c() # mean absolute percentage error
 r2_vec<-c() # R squared
 mse_vec<-c() # mean squared errors
-lamda<-seq(1,50,by=1)
+lamda<-seq(1,25,by=1)
 for (i in lamda){
   
    z_model<-ridgereg(formula=medv~.,data=training_set,lamda=i)
