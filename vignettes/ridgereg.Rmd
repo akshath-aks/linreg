@@ -143,7 +143,7 @@ plot(ridgefit)
 6. Evaluating the performance of all three models on the test dataset and concluding comments
 
 
-  Performance of regression models are evaluated by root mean squared error, R squared, Mean absolute percentage error. below you can find all the performance evaluating criteria for all the three models implemented. Finally using 10 cross fold validation gives the best hyperparmeter value λ.
+  Performance of regression models are evaluated by root mean squared error, R squared, Mean absolute percentage error. below you can find all the performance evaluating criteria for all the three models implemented. Finally we can see that RMSE for all three models is almost same that is around 4.5.
     
 ```{r,include=TRUE,eval=TRUE,echo=TRUE}
 #performance of lm 
@@ -168,7 +168,7 @@ plot(lamda,mape_vec)
 plot(lamda,r2_vec)
 
 
-#performance of 10 cross fold validation
+#performance of 10 cross fold validation after predicting on test data
 pre<-predict(ridgefit,test_set)
 #Root mean squared error
 rmse_10<-rminer::mmetric(test_set[,14],pre,"RMSE")
