@@ -1,18 +1,17 @@
-#' Title
+#' Ridgereg Class calculates Ridge Regression Model For Data frame.
 #'
-#' @field formula formula. 
-#' @field data data.frame. 
-#' @field B_ridge vector. 
-#' @field y_h matrix. 
-#' @field X matrix. 
-#' @field data_name character. 
-#' @field lamda numeric. 
+#' @field formula (formula) Dependent and independent columns in data frame
+#' @field data (data.frame) Data frame for ridge regression models
+#' @field B_ridge (vector) calculates Beta ridge coefficients
+#' @field y_h (matrix) Estimated dependent values
+#' @field X (matrix) model matrix which is scaled later
+#' @field data_name (character) Data Frame name
+#' @field lamda (numeric) hyper parameter value
 #'
 #' @return
 #' @exportClass ridgereg
 #' @export ridgereg
-#'
-#' @examples
+
 ridgereg<-setRefClass('ridgereg', 
                       fields=list(formula='formula',
                                          data ='data.frame',
