@@ -6,6 +6,7 @@
 #' @import ggplot2
 #' @import nycflights13
 #' @importFrom  plotly ggplotly
+#' @importFrom dplyr %>%
 #'
 #' @examples
 Visualizing_flight_delay<-function(){
@@ -44,7 +45,7 @@ Visualizing_flight_delay<-function(){
   requireNamespace('plotly')
   p<-ggplot2::ggplot(merging,ggplot2::aes(label1=mean_delay))+
     ggplot2::geom_point(ggplot2::aes(x=lat,y=lon,color=airport))+
-    ggplot2::theme(legend.position = 'none')+xlab('latitude')+ylab('longitude')+
+    ggplot2::theme(legend.position = 'none')+ggplot2::xlab('latitude')+ggplot2::ylab('longitude')+
     ggplot2::ggtitle('Mean delay of flights for different airports by longitude and latitude.')
   return(plotly::ggplotly(p))
 }
