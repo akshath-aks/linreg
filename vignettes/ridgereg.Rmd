@@ -48,13 +48,15 @@ After installation run the code below to find vignettes.
 
 1.predict()
 
-    Estimates dependent values,return the predicted values.
+  Estimates dependent values,return the predicted values.
+  
 2.coef()
 
-    Returns the ridge regression coefficients.
+  Returns the ridge regression coefficients.
+  
 3.print()
 
-    Prints out the coefficients.
+  Prints out the coefficients.
     
 **Examples**
 
